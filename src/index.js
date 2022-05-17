@@ -2,9 +2,16 @@
 import './styles.css';
 
 // Importamos la función del archivo componentes JS
-import {Todo} from './classes/todo.class.js';
+// import {Todo} from './classes/todo.class.js';
+// IMportamos la función del archivo todo-list JS
+// import { TodoList } from './classes/todo-list.class';
 
+// Manera optimizada de importar las clases
+import {Todo, TodoList} from './classes/index.js'
 
+const listaTareas = new TodoList();
 const tarea = new Todo('Aprender JS');
 
-console.log(tarea);
+listaTareas.nuevoTodo(tarea);
+
+console.log(listaTareas);
