@@ -37,7 +37,7 @@ export const crearTodoHTML = (todo) => {
     return divTodo;
 }
 
-// Evento
+// Evento crear tarea
 
 txtInput.addEventListener('keyup', (event) => {
     if(event.keyCode === 13 && txtInput.value.length > 0) {
@@ -55,7 +55,40 @@ txtInput.addEventListener('keyup', (event) => {
 });
 
 /*
-El keyup nos devuelve muchos valores. LOs más importantes para nosotros son:
+El keyup nos devuelve muchos valores. Los más importantes para nosotros son:
     - keyCode --> la tecla presionada
-    - 
+    - value --> el valor que está escrito
+EStos son los que emplearemos para el evento crear tarea
+*/
+
+// Evento marcar como completado
+
+divTodoList.addEventListener('click', (event) => {
+    // Esta constante devuelve el nombre del elemento que clicamos 
+    // Para ver solo el nombre del elemento clicado empleamos localName
+    const nombreElementoClick = event.target.localName;
+
+    // Tenemos que seleccionar el li para poder eliminarlo
+    // para ello debemos subir dos niveles con el parentElement
+    const todoElemento = event.target.parentElement.parentElement;
+    
+    // Para poder eliminar la tarea correcta lo vamos a hacer a través del id
+    // para ello empleamos el getAttribute para elegir el atributo del elemento
+    // HTML que necesitamos
+    const todoId = todoElemento.getAttribute('data-id');
+    
+    // Sabemos que el elemento input es el check de si la tarea está completada o no
+    // lo comprobamos con un console.log(nombreElementoClick)
+    if(nombreElementoClick.includes('input')) {
+        // cambiamos el valor de completado
+        listaTareas.marcarCompletado(todoId);
+
+        // creamos la acción de tachado
+        todoElemento.classList.toggle('completed');
+    }
+});
+
+/*
+el click también nos devuelve muchos valores. Los importantes son:
+    - target --> señala el elemento que ha sido clicado
 */

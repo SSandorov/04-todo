@@ -18,7 +18,14 @@ export class TodoList {
 
     // Método que controla que tarea está completada y que tarea no lo está
     marcarCompletado(id) {
-
+        for(const todo of this.todos) {
+            // comprobamos si son del mismo tipo
+            console.log(id, todo.id);
+            if(todo.id == id) {
+                todo.completado = !todo.completado;
+                break;
+            }
+        }
     }
 
     // Método que elimina las tareas completadas
