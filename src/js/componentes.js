@@ -61,12 +61,15 @@ El keyup nos devuelve muchos valores. Los más importantes para nosotros son:
 EStos son los que emplearemos para el evento crear tarea
 */
 
-// Evento marcar como completado
+// Evento marcar como completado y eliminar
 
 divTodoList.addEventListener('click', (event) => {
     // Esta constante devuelve el nombre del elemento que clicamos 
     // Para ver solo el nombre del elemento clicado empleamos localName
     const nombreElementoClick = event.target.localName;
+    // input --> tarea completada
+    // button --> botón eliminar
+    // label --> texto
 
     // Tenemos que seleccionar el li para poder eliminarlo
     // para ello debemos subir dos niveles con el parentElement
@@ -85,6 +88,15 @@ divTodoList.addEventListener('click', (event) => {
 
         // creamos la acción de tachado
         todoElemento.classList.toggle('completed');
+    }
+
+    // El elemento button es la x de eliminar tarea
+    if(nombreElementoClick.includes('button')) {
+        // eliminamos la tarea
+        listaTareas.eliminarTodo(todoId);
+
+        // el evento lo vemos en el HTML
+        divTodoList.removeChild(todoElemento);
     }
 });
 

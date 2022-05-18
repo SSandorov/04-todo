@@ -13,7 +13,9 @@ export class TodoList {
 
     // Método que controla la eliminación de tareas
     eliminarTodo(id) {
-
+        // El filter nos devuelve un nuevo arreglo con los elementos que coincidan 
+        // con la condición
+        this.todos = this.todos.filter(todo => todo.id != id);
     }
 
     // Método que controla que tarea está completada y que tarea no lo está
