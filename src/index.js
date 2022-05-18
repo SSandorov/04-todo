@@ -8,10 +8,13 @@ import './styles.css';
 
 // Manera optimizada de importar las clases
 import {Todo, TodoList} from './classes/index.js'
+import { crearTodoHTML } from './js/componentes.js';
 
 const listaTareas = new TodoList();
-const tarea = new Todo('Aprender JS');
+const tarea = new Todo('Aprender JS!!');
 
 listaTareas.nuevoTodo(tarea);
 
 console.log(listaTareas);
+
+crearTodoHTML(tarea);

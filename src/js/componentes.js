@@ -1,20 +1,31 @@
-// Importamos la hoja de estilos para cambiar los estilos de forma dinámica
-import '../css/componentes.css';
-// Importamos una imagen
-// import webpacklogo from '../assets/img/webpack-logo.png';
+// Referencias en el HTML
+const divTodoList = document.querySelector('.todo-list');
 
-export const saludar = (nombre) => {
-    console.log('Creando etiqueta H1');
+// Creamos un método que nos añade las distintas tareas en forma de HTML
+export const crearTodoHTML = (todo) => {
+    // Constante que maneja la creación de la tarea a partir de la clase todo
+    const tareaHTML = 
+    `
+    <li class="${ (todo.completado) ? 'completed' : '' }" data-id="${todo.id}">
+        <div class="view">
+            <input class="toggle" type="checkbox" ${ (todo.completado) ? 'checked' : '' }>
+            <label>${todo.tarea}</label>
+            <button class="destroy"></button>
+        </div>
+        <input class="edit" value="Create a TodoMVC template">
+    </li>
+    `;
 
-    const h1 = document.createElement('H1');
-    h1.innerText = `Hola, ${nombre}`;
+    // Creamos el contenedor que almacena los elementos li
+    const divTodo = document.createElement('div');
+    // Añadimos los elementos li creados dentro del contenedor
+    divTodo.innerHTML = tareaHTML;
 
-    document.body.append(h1);
+    // Añadimos el contenedor con la lista de tareas al ul .todo-list del index.html
+    // Ponemos el firstElementChild para que no sea un contenedor dentro de un ul, sino que
+    // sea un li. Es por buenas prácticas del HTML
+    divTodoList.append(divTodo.firstElementChild);
 
-    // Añadimos la imagen
-    /*
-    const img1 = document.createElement('img');
-    img1.src = webpacklogo;
-    document.body.append(img1);
-    */
+    // La función nos devuelve el contenedor
+    return divTodo;
 }
