@@ -1,5 +1,12 @@
+// Importaciones
+import {Todo} from '../classes/index.js';
+import {listaTareas} from '../index.js'
+
 // Referencias en el HTML
 const divTodoList = document.querySelector('.todo-list');
+
+// Referencia al evento de añadir una tarea
+const txtInput = document.querySelector('.new-todo');
 
 // Creamos un método que nos añade las distintas tareas en forma de HTML
 export const crearTodoHTML = (todo) => {
@@ -29,3 +36,26 @@ export const crearTodoHTML = (todo) => {
     // La función nos devuelve el contenedor
     return divTodo;
 }
+
+// Evento
+
+txtInput.addEventListener('keyup', (event) => {
+    if(event.keyCode === 13 && txtInput.value.length > 0) {
+        
+        // Cuando presionamos enter nos añade el texto al arreglo
+        const nuevoTodo = new Todo(txtInput.value);
+        listaTareas.nuevoTodo(nuevoTodo);
+
+        // Añadimos el arreglo en el ul
+        crearTodoHTML(nuevoTodo);
+
+        // Vaciamos el input
+        txtInput.value = '';
+    }
+});
+
+/*
+El keyup nos devuelve muchos valores. LOs más importantes para nosotros son:
+    - keyCode --> la tecla presionada
+    - 
+*/

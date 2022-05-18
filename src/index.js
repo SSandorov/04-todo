@@ -10,7 +10,7 @@ import './styles.css';
 import {Todo, TodoList} from './classes/index.js'
 import { crearTodoHTML } from './js/componentes.js';
 
-const listaTareas = new TodoList();
+export const listaTareas = new TodoList();
 const tarea = new Todo('Aprender JS!!');
 
 listaTareas.nuevoTodo(tarea);
