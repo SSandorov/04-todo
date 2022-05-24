@@ -32,6 +32,8 @@ export class TodoList {
 
     // Método que elimina las tareas completadas
     eliminarCompletados() {
-        
+        // Empleamos filter() como en el método eliminarTodo()
+        // Necesito filtrar todas las tareas que no estén completadas
+        this.todos = this.todos.filter(todo => !todo.completado);
     }
 }

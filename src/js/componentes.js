@@ -8,6 +8,9 @@ const divTodoList = document.querySelector('.todo-list');
 // Referencia al evento de añadir una tarea
 const txtInput = document.querySelector('.new-todo');
 
+// Referencia al botón de eliminar tareas completadas
+const btnBorrar = document.querySelector('.clear-completed');
+
 // Creamos un método que nos añade las distintas tareas en forma de HTML
 export const crearTodoHTML = (todo) => {
     // Constante que maneja la creación de la tarea a partir de la clase todo
@@ -104,3 +107,30 @@ divTodoList.addEventListener('click', (event) => {
 el click también nos devuelve muchos valores. Los importantes son:
     - target --> señala el elemento que ha sido clicado
 */
+
+btnBorrar.addEventListener('click', () => {
+
+    // Cuando clicamos en el botón nos ejecuta el método eliminarCompletados
+    listaTareas.eliminarCompletados();
+
+    // Ahora eliminamos las tareas completadas en el HTML
+    // Para ello eliminaremos desde la última posición a la primera, para que 
+    // así no surjan problemas con la posición de las tareas, ya que al eliminar una
+    // tarea que esté completada la siguiente tarea pasará a la posición anterior, y eso
+    // puede acarrear fallos en la ejecución
+
+    // Por esta razón llamamos a la última tarea de la lista dentro del bucle
+    for(let i = divTodoList.children.length-1; i>=0; i--) {
+
+        // Añadimos la tarea a una variable
+        const elemento = divTodoList.children[i];
+
+        // Comprobamos que tareas están completadas a partir de la clase completed
+        // para saber qué tareas serán eliminadas
+        if(elemento.classList.contains('completed')) {
+            divTodoList.removeChild(elemento);
+        }
+
+        
+    }
+});
