@@ -1,5 +1,22 @@
 export class Todo {
 
+    /*
+    El JSON.parse nos devuelve un objeto, no una instancia de la clase, por lo que
+    si tenemos un método asociado a la clase no vamos a poder emplearlo cuando se
+    reconstruyan las tareas.
+    Para arreglarlo creamos el siguiente método estático
+    */
+                    // Objeto desestructurado
+   static fromJson({id, tarea, completado, creado}) {
+        const tempTodo = new Todo(tarea);
+
+        tempTodo.id = id;
+        tempTodo.completado = completado;
+        tempTodo.creado = creado;
+
+        return tempTodo;
+   }
+
     constructor(tarea) {
         // La tarea que quereamos añadir a la lista
         this.tarea = tarea;

@@ -47,3 +47,6 @@ setTimeout(()=>{
 // Ahora creamos en el HTML las tareas que están guardadas en el localStorage
 
 listaTareas.todos.forEach(todo => crearTodoHTML(todo));
+
+// comprobamos que todas las tareas son instancias de la clase
+console.log('todos', listaTareas.todos);

@@ -1,5 +1,7 @@
 // Clase que maneja la agrupación de tareas
 
+import { Todo } from "./todo.class";
+
 export class TodoList {
 
     constructor() {
@@ -69,6 +71,14 @@ export class TodoList {
             /*
             Como tenemos un JSON y lo que necesitamos es un objeto para poder recrear las
             tareas guardadas en memoria, debemos revertir el estado del objeto
+            INCONVENIENTE:
+            El JSON.parse nos devuelve un objeto, no una instancia de la clase, por lo que
+            si tenemos un método asociado a la clase no vamos a poder emplearlo cuando se
+            reconstruyan las tareas.
+            Para arreglar este tenemos que irnos a la clase todo.class.js y crear un método
+            que nos convierta el objeto creado en una instancia de la clase.
+            Después del condicional de este método, que nos transforma nuestras tareas de JSON
+            a objetos, debemos hacer lo siguiente (mirar el código después del condicional)
             */
             // this.todos = JSON.parse(localStorage.getItem('todo'));
             // console.log('CargarLocal:', this.todos);
@@ -82,5 +92,12 @@ export class TodoList {
         this.todos = (localStorage.getItem('todo')) 
             ? JSON.parse(localStorage.getItem('todo')) 
             : [];
+
+        // después de transformar con el JSON.parse a objetos, ahora debemos transformar
+        // los objetos a instancias a partir del método map. El map() es un método nativo
+        // de JS que itera en cada objeto de un arreglo y nos devuelve otro arreglo
+        // transformado. Por ejemplo, en este caso, nos aplica el método estático que creamos
+        // en la clase Todo() y nos transforma todos los objetos en instancias
+        this.todos = this.todos.map(obj => Todo.fromJson(obj));
     }
 }
