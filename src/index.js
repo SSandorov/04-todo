@@ -43,3 +43,7 @@ setTimeout(()=>{
 }, 1500);
 */
 // Lo tenemos como referencia por si tenemos que emplearlo alguna vez
+
+// Ahora creamos en el HTML las tareas que están guardadas en el localStorage
+
+listaTareas.todos.forEach(todo => crearTodoHTML(todo));
