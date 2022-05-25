@@ -11,6 +11,12 @@ const txtInput = document.querySelector('.new-todo');
 // Referencia al botón de eliminar tareas completadas
 const btnBorrar = document.querySelector('.clear-completed');
 
+// Referencia a la lista de filtros
+const ulFiltros = document.querySelector('.filters');
+
+// Referencia al contenedor de los filtros
+const anchorFiltros = document.querySelectorAll('.filtro');
+
 // Creamos un método que nos añade las distintas tareas en forma de HTML
 export const crearTodoHTML = (todo) => {
     // Constante que maneja la creación de la tarea a partir de la clase todo
@@ -133,4 +139,59 @@ btnBorrar.addEventListener('click', () => {
 
         
     }
+});
+
+// Evento para filtrar las tareas
+ulFiltros.addEventListener('click', (event) => {
+    /*
+    Como estamos atentos al click de la lista entera, debemos definir qué es lo que
+    queremos escuchar
+    */
+    /*
+    console.log(event.target.text);
+    Este console.log nos devuelve:
+    - Todos, Pendientes, Completados --> texto de los elementos de la lista
+    - undefined --> cuando tocamos en los espacios en blanco
+    */
+   // Almacenamos esa respuesta en la siguiente variable
+   const filtro = event.target.text;
+
+   // cuando es undefined no hace nada
+   if(!filtro) {return;}
+
+   // quitamos todos los recuadros de los filtros
+   anchorFiltros.forEach(elem => elem.classList.remove('selected'));
+   // añadimos el recuadro al filtro seleccionado
+   event.target.classList.add('selected');
+
+   // creamos un bucle que nos comprueba si la tarea coincide con el filtro, y aplica
+   // la clase hidden del html para ocultar las tareas que no lo cumplan
+    
+   for(const elemento of divTodoList.children) {
+       // como cada vez que filtremos las tareas los fitros aplicados son distintos,
+       // debemos quitar la clase hidden de todos los elementos
+       elemento.classList.remove('hidden');
+
+       // comprobamos si las tareas están completadas o no
+       const completado = elemento.classList.contains('completed');
+
+       // Empleamos un condicional switch para comprar que hacer en los distintos casos
+       // como ya comprobamos los dos casos, en el Todo mostrará todo, porque nuestro
+       // estado base es que elimina el hidden de todas las tareas
+       switch(filtro) {
+            case 'Pendientes':
+                if(completado) {
+                    elemento.classList.add('hidden');
+                }
+            break;
+
+            case 'Completados':
+                if(!completado) {
+                    elemento.classList.add('hidden');
+                }
+            break;
+       }
+
+
+   }
 });

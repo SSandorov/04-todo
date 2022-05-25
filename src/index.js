@@ -49,4 +49,4 @@ setTimeout(()=>{
 listaTareas.todos.forEach(todo => crearTodoHTML(todo));
 
 // comprobamos que todas las tareas son instancias de la clase
-console.log('todos', listaTareas.todos);
+// console.log('todos', listaTareas.todos);
